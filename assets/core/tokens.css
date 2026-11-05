@@ -1,0 +1,169 @@
+/* =========================================================
+   设计令牌 Design Tokens · V2「深空控制台 / 蓝图网格」
+   规则：所有颜色只在这里定义，组件通过 var() 消费
+   图表画布（SVG/iframe）保留白色仪表卡，与暗色面板形成强对比
+   ========================================================= */
+
+:root{
+  /* ---------- 画布 ---------- */
+  --paper:      #0c1420;   /* 主背景，深海军蓝 */
+  --paper-2:    #101a2a;   /* 次级底板 */
+  --paper-3:    #142134;   /* 三级底板 */
+  --card:       #152236;   /* 卡片 */
+  --card-soft:  #182740;   /* 卡片内嵌区 */
+
+  /* ---------- 描边 ---------- */
+  --line:       #223048;
+  --line-2:     #2c3d5a;
+  --line-3:     #3d527a;
+
+  /* ---------- 墨色（文字） ---------- */
+  --ink:        #e8f0fa;
+  --ink-2:      #c3d2e4;
+  --ink-3:      #8ea2bd;
+  --ink-4:      #647a97;
+  --ink-inv:    #0c1420;
+
+  /* ---------- 主强调 ---------- */
+  --jade:       #46c8a4;
+  --jade-d:     #6ee3c4;
+  --jade-l:     rgba(70,200,164,.12);
+  --clay:       #eda36b;
+  --clay-d:     #f5bd8f;
+  --clay-l:     rgba(237,163,107,.12);
+
+  /* ---------- 五类方法色（暗底霓虹） ---------- */
+  --c-cv:       #45d0ae;   /* 计算机视觉 */
+  --c-ts:       #f2a35c;   /* 时序预测 */
+  --c-nlp:      #b48ae6;   /* 自然语言处理 */
+  --c-opt:      #66a8ff;   /* 优化算法 */
+  --c-kg:       #cdd475;   /* 知识图谱 */
+
+  --bg-cv:      rgba(69,208,174,.12);
+  --bg-ts:      rgba(242,163,92,.12);
+  --bg-nlp:     rgba(180,138,230,.12);
+  --bg-opt:     rgba(102,168,255,.12);
+  --bg-kg:      rgba(205,212,117,.12);
+
+  /* ---------- 语义色 ---------- */
+  --ok:         #57cf8d;
+  --ok-bg:      rgba(87,207,141,.12);
+  --warn:       #e9b961;
+  --warn-bg:    rgba(233,185,97,.12);
+  --bad:        #f18c7e;
+  --bad-bg:     rgba(241,140,126,.12);
+
+  /* ---------- 圆角与阴影 ---------- */
+  --r-s: 5px;
+  --r-m: 9px;
+  --r-l: 14px;
+  --r-xl: 20px;
+
+  --sh-1: 0 1px 2px rgba(2,8,18,.5);
+  --sh-2: 0 1px 2px rgba(2,8,18,.55), 0 10px 26px -12px rgba(2,8,18,.65);
+  --sh-3: 0 2px 4px rgba(2,8,18,.6), 0 18px 44px -18px rgba(2,8,18,.75);
+
+  /* ---------- 字体 ---------- */
+  --mono: 'JetBrains Mono','SFMono-Regular','Cascadia Mono',Consolas,'Liberation Mono',monospace;
+  --sans: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI Variable','Segoe UI',
+          'PingFang SC','Hiragino Sans GB','Microsoft YaHei UI','Microsoft YaHei',sans-serif;
+
+  /* ---------- 布局 ---------- */
+  --nav-h: 54px;
+  --maxw: 1180px;
+  --sp-1: 6px;  --sp-2: 10px;  --sp-3: 14px;
+  --sp-4: 20px; --sp-5: 28px; --sp-6: 40px;
+}
+
+/* =========================================================
+   Reset
+   ========================================================= */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.68;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* 背景：深空 + 蓝图网格 + 双色氖光 */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1000px 620px at 6% -12%,  rgba(70,200,164,.10) 0%, rgba(70,200,164,0) 60%),
+    radial-gradient(880px 560px at 96% -6%,   rgba(237,163,107,.08) 0%, rgba(237,163,107,0) 58%),
+    radial-gradient(900px 760px at 74% 102%,  rgba(102,168,255,.08) 0%, rgba(102,168,255,0) 60%),
+    radial-gradient(760px 620px at 18% 96%,   rgba(180,138,230,.06) 0%, rgba(180,138,230,0) 60%),
+    var(--paper);
+}
+/* 极淡蓝图网格，全局铺铁 */
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(to right, rgba(140,180,255,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140,180,255,.06) 1px, transparent 1px),
+    linear-gradient(to right, rgba(140,180,255,.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140,180,255,.028) 1px, transparent 1px);
+  background-size:152px 152px, 152px 152px, 38px 38px, 38px 38px;
+}
+
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;font-size:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:inherit}
+img,svg{max-width:100%}
+::selection{background:rgba(70,200,164,.32);color:#eafffa}
+
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--paper-2)}
+::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px;border:3px solid var(--paper-2)}
+::-webkit-scrollbar-thumb:hover{background:var(--line-3)}
+
+:focus-visible{outline:2px solid var(--jade);outline-offset:2px;border-radius:3px}
+
+/* =========================================================
+   排版基元
+   ========================================================= */
+h1,h2,h3,h4,h5{font-weight:650;letter-spacing:-.005em;line-height:1.3;color:var(--ink)}
+p{color:var(--ink-2)}
+b,strong{font-weight:650;color:var(--ink)}
+
+.wrap{width:min(var(--maxw),calc(100% - 48px));margin:0 auto}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.kicker{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--jade-d);display:inline-flex;align-items:center;gap:9px;
+}
+.kicker::before{content:'';width:20px;height:1.5px;background:currentColor;opacity:.7;border-radius:2px}
+.kicker.plain::before{display:none}
+.kicker.clay{color:var(--clay-d)}
+
+.eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4);
+}
+
+.lede{font-size:13.5px;line-height:1.8;color:var(--ink-2)}
+
+/* 工具类 */
+.muted{color:var(--ink-3)}
+.small{font-size:12px}
+.nowrap{white-space:nowrap}
+.hr{height:1px;background:var(--line);border:0;margin:0}
+.stack{display:flex;flex-direction:column}
+.row{display:flex;align-items:center}
+
+/* 动效：轻微上浮 */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rise{animation:rise .42s cubic-bezier(.2,.7,.3,1) both}
+.d1{animation-delay:.03s}.d2{animation-delay:.06s}.d3{animation-delay:.09s}.d4{animation-delay:.12s}.d5{animation-delay:.15s}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
